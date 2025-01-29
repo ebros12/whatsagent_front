@@ -1,0 +1,113 @@
+/* Asegura que el contenedor principal ocupe todo el alto disponible */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Esto hace que ocupe todo el alto disponible */
+  }
+  
+  /* Asegura que la lista de mensajes ocupe todo el espacio disponible */
+  .full-width-list {
+    flex-grow: 1; /* Hace que la lista ocupe el máximo espacio disponible */
+    overflow-y: auto; /* Habilita el scroll si el contenido excede el tamaño */
+    margin-bottom: 10px; /* Espacio entre la lista de mensajes y el formulario */
+  }
+  
+  /* Estilos para cada mensaje */
+  .mensaje {
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: block;
+    word-wrap: break-word; /* Permite que las palabras largas se ajusten correctamente */
+  }
+  
+  /* Estilo para los mensajes enviados por el cliente */
+  .cliente {
+    background-color: #ddf7d4;
+    text-align: right;
+  }
+  
+  /* Estilo para los mensajes enviados por el agente */
+  .agente {
+    background-color: #89cff7;
+  }
+  
+  /* Estilos para el input y botón de mensaje */
+  .mensaje-input {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px; /* Añadido padding para separación entre el input y el botón */
+    justify-content: space-between; /* Separación entre el input y el botón */
+  }
+  
+  /* Hace que el campo de input ocupe todo el espacio disponible */
+  mat-form-field {
+    flex-grow: 1;
+  }
+  
+  mat-list {
+    width: 100%; /* Asegura que mat-list ocupe todo el ancho disponible */
+  }
+  
+  mat-list-item {
+    width: 100%;
+    padding: 0; /* Elimina el padding extra que podría causar espacios innecesarios */
+    margin: 0;
+  }
+  
+  /* Ajustar el tamaño del grid para que no se sobrecargue */
+  mat-grid-list {
+    width: 100%; /* Asegura que mat-grid-list ocupe el ancho completo */
+  }
+  
+  mat-grid-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que los elementos dentro del tile estén alineados de arriba hacia abajo */
+  }
+  .chat-container{
+    width: 100%;
+    padding: 5rem;
+  margin: 2rem;
+  }
+  .conversaciones.mensaje {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .conversaciones{
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .div1 {
+    grid-column: span 2 / span 2;
+}
+
+.div2 {
+    grid-column: span 2 / span 2;
+    grid-row-start: 2;
+}
+  .conversaciones.mensaje strong {
+    font-weight: bold;
+  }
+  
+  .conversaciones.mensaje small {
+    color: #888;
+    font-size: 0.8em;
+  }
+  .nav {
+    background-color: #151515;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 2rem 0 #424242;
+
+  }
+
+  

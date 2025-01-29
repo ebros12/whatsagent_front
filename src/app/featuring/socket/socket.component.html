@@ -1,0 +1,18 @@
+<div>
+    <label for="channel">Selecciona un canal:</label>
+    <select id="channel" [(ngModel)]="currentChannel" (change)="joinChannel(currentChannel)">
+      <option value="general">General</option>
+      <option value="deportes">Deportes</option>
+      <option value="tecnologia">Tecnología</option>
+    </select>
+  </div>
+  
+  <div *ngFor="let msg of messages">
+    <p><strong>{{ msg.user }}:</strong> {{ msg.message }}</p>
+  </div>
+  
+  <div>
+    <input [(ngModel)]="message" placeholder="Escribe un mensaje..." />
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+  

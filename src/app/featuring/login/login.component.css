@@ -1,0 +1,63 @@
+/* Fondo de la página con gradiente */
+body {
+    background: linear-gradient(45deg, #4e73df, #1cc88a);  /* Fondo de gradiente */
+    font-family: 'Arial', sans-serif;
+    height: 100vh;  /* Asegura que ocupe toda la altura de la ventana */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Contenedor principal de la página */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Asegura que ocupe toda la altura de la ventana */
+    padding: 20px;  /* Un pequeño padding */
+    box-sizing: border-box;
+  }
+  
+  /* Formulario de login */
+  .login-form {
+    width: 100%;
+    max-width: 400px;  /* Ancho máximo para el formulario */
+    background-color: white;  /* Fondo blanco */
+    padding: 30px;
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+    text-align: center;  /* Centra el contenido dentro del formulario */
+  }
+  
+  /* Título */
+  .login-form h2 {
+    margin-bottom: 20px;
+    color: #333;  /* Color oscuro para el título */
+  }
+  
+  /* Estilos para los campos del formulario */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;  /* Espaciado entre los campos */
+  }
+  
+  /* Estilo para el botón */
+  button {
+    width: 100%;  /* El botón ocupa todo el ancho */
+    margin-top: 20px;
+  }
+  
+  /* Media Queries para pantallas grandes */
+  @media (min-width: 600px) {
+    .login-form {
+      width: 80%;  /* En pantallas grandes el formulario ocupa el 80% */
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .login-form {
+      width: 40%;  /* En pantallas aún más grandes, el formulario ocupa el 40% */
+    }
+  }
+  

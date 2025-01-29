@@ -1,0 +1,101 @@
+<div class="home-container" *ngIf="!cargando">
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="!error">
+      <mat-grid-list cols="3" rowHeight="50px" class="nav">
+        <mat-grid-tile><h1>Bienvenido <strong> {{ usuario }} </strong></h1>  </mat-grid-tile>
+        <mat-grid-tile><h2>Tu perfil es de {{ tipoUsuario }}</h2></mat-grid-tile>
+        <mat-grid-tile>
+          <div *ngIf="tipoUsuario == 'Cliente' ">
+            <button mat-raised-button color="success" (click)="openCrearMensajeModal()">Crear Mensaje</button>
+          </div>
+        
+          <button mat-raised-button color="warn" (click)="logOff()">Log Off</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+  
+      <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile [colspan]="4" [rowspan]="4">
+          <mat-list class="chat-container">
+            <mat-list-item *ngFor="let conversacion of conversaciones" (click)="seleccionarConversacion(conversacion)">
+              <div class="conversaciones mensaje">
+                <div class="div1">
+                  <strong *ngIf="conversacion.user">{{ conversacion.user.name }}</strong>
+                  </div>  
+                  <div class="div2">
+                    <span>{{ conversacion.text }}</span>
+                    <small>{{ conversacion.status }}</small>
+                  </div>
+
+
+
+  
+
+
+                <!-- Botón para asignar agente si no tiene uno asignado -->
+  
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+  
+        <mat-grid-tile [colspan]="8" [rowspan]="4">
+          <div class="chat-container">
+            <mat-list class="full-width-list">
+              <!-- Muestra los mensajes solo si hay alguno en la conversación -->
+              
+<!--               <mat-list-item *ngFor="let mensaje of mensajesConversacionSeleccionada">
+                <div [ngClass]="{'cliente': mensaje.senderId === idUser, 'agente': mensaje.senderId !== idUser}" class="mensaje">
+                  {{ mensaje.content }}
+                </div>
+              </mat-list-item> -->
+
+              <mat-list-item *ngFor="let msg of mensajesSockets">
+                <div [ngClass]="{'cliente': msg.user === idUser, 'agente': msg.user !== idUser}" class="mensaje">
+                  {{ msg.message }}
+                </div>
+              </mat-list-item>
+
+
+            </mat-list>
+  
+            <div class="mensaje-input">
+              <mat-form-field class="full-width">
+                <mat-label>Escribe un mensaje...</mat-label>
+                <input matInput [(ngModel)]="nuevoMensaje" />
+              </mat-form-field>
+              <button mat-icon-button color="primary" (click)="enviarMensaje()">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+  
+  <div *ngIf="cargando">
+    <!-- Aquí podrías agregar un spinner o algo que indique que se está cargando -->
+  </div>
+  
+  <!-- Modal en el mismo componente usando ng-template -->
+  <ng-template #crearMensajeModal>
+    <h1 mat-dialog-title>Ingrese Solicitud</h1>
+  
+   
+      <mat-form-field appearance="fill">
+        <mat-label>Motivo</mat-label>
+        <input matInput [(ngModel)]="nombre" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Detalle su solicitud</mat-label>
+        <input matInput [(ngModel)]="text" required>
+      </mat-form-field>
+  
+ 
+  
+    <div mat-dialog-actions>
+      <button mat-button (click)="crearConversacion()">Crear</button>
+      <button mat-button mat-dialog-close>Cancelar</button>
+    </div>
+  </ng-template>
