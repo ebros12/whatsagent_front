@@ -20,8 +20,11 @@
               <div class="conversaciones mensaje">
                 <div class="div1">
                   <strong *ngIf="conversacion.user">{{ conversacion.user.name }}</strong>
+         
                   </div>  
                   <div class="div2">
+                    
+                
                     <span>{{ conversacion.text }}</span>
                     <small>{{ conversacion.status }}</small>
                   </div>
@@ -61,9 +64,9 @@
             <div class="mensaje-input">
               <mat-form-field class="full-width">
                 <mat-label>Escribe un mensaje...</mat-label>
-                <input matInput [(ngModel)]="nuevoMensaje" />
+                <input (keydown)="onKeyDown($event)" matInput [(ngModel)]="nuevoMensaje" />
               </mat-form-field>
-              <button mat-icon-button color="primary" (click)="enviarMensaje()">
+              <button mat-icon-button color="primary"   (click)="enviarMensaje()">
                 <mat-icon>send</mat-icon>
               </button>
             </div>

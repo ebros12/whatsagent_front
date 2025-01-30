@@ -11,9 +11,20 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TemplateRef, ViewChild } from '@angular/core';
 import { io } from 'socket.io-client';
-
+import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-home',
+  animations: [
+    trigger('transitionMessages', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('500ms', style({ opacity: 0 }))
+      ])
+    ])
+  ],
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -27,7 +38,8 @@ import { io } from 'socket.io-client';
     CommonModule,
     FormsModule,
     MatDialogModule,  // Asegúrate de importar MatDialogModule
-    NgFor, NgIf
+    NgFor, NgIf,
+    
   ],
 })
 export class HomeComponent {
@@ -48,6 +60,9 @@ export class HomeComponent {
   status: string = 'abierta';
   agentId: number | null = null;
 
+  recibido_chat = new Audio('assets/notificacion_chat.mp3'); // Ruta del sonido en la carpeta assets
+  enviado_chat = new Audio('assets/enviado_chat.mp3'); // Ruta del sonido en la carpeta assets
+
 
   mensajesSockets: { user: number; message: string; channel: string }[] = [];
 
@@ -62,6 +77,7 @@ export class HomeComponent {
   ) {}
 
   ngOnInit(): void {
+
     const usuarioLocalStorage = localStorage.getItem('user');
     const usuarioData = JSON.parse(usuarioLocalStorage || '{}');
   
@@ -83,6 +99,7 @@ export class HomeComponent {
       if (!exists) {
         console.log('Mensaje recibido:', data);
         this.mensajesSockets.push(data);
+        this.recibido_chat.play().catch((err) => console.error('Error al reproducir audio:', err));
       }
     });
   }
@@ -111,6 +128,13 @@ export class HomeComponent {
       },
     });
   }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.enviarMensaje();
+    }
+  }
+  
 
   cargarMensajesConversacion(conversationId: number): void {
     const url = `http://localhost:3000/conversations/${conversationId}/messages`;
@@ -142,6 +166,7 @@ export class HomeComponent {
             
             if (!exists) {
               this.mensajesSockets.push(msg);
+
             }
           });
         });
@@ -194,6 +219,12 @@ export class HomeComponent {
             channel: this.currentConversationId
           })
           this.nuevoMensaje = '';
+        
+            
+          this.enviado_chat.play().catch((err) => console.error('Error al reproducir audio:', err));
+
+          
+
         },
         error: (err) => {
           console.error('Error al enviar el mensaje:', err);
