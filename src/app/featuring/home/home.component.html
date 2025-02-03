@@ -28,13 +28,6 @@
                     <span>{{ conversacion.text }}</span>
                     <small>{{ conversacion.status }}</small>
                   </div>
-
-
-
-  
-
-
-                <!-- Botón para asignar agente si no tiene uno asignado -->
   
               </div>
             </mat-list-item>
@@ -44,13 +37,7 @@
         <mat-grid-tile [colspan]="8" [rowspan]="4">
           <div class="chat-container">
             <mat-list class="full-width-list">
-              <!-- Muestra los mensajes solo si hay alguno en la conversación -->
-              
-<!--               <mat-list-item *ngFor="let mensaje of mensajesConversacionSeleccionada">
-                <div [ngClass]="{'cliente': mensaje.senderId === idUser, 'agente': mensaje.senderId !== idUser}" class="mensaje">
-                  {{ mensaje.content }}
-                </div>
-              </mat-list-item> -->
+
 
               <mat-list-item *ngFor="let msg of mensajesSockets">
                 <div [ngClass]="{'cliente': msg.user === idUser, 'agente': msg.user !== idUser}" class="mensaje">
@@ -77,10 +64,10 @@
   </div>
   
   <div *ngIf="cargando">
-    <!-- Aquí podrías agregar un spinner o algo que indique que se está cargando -->
+
   </div>
   
-  <!-- Modal en el mismo componente usando ng-template -->
+ 
   <ng-template #crearMensajeModal>
     <h1 mat-dialog-title>Ingrese Solicitud</h1>
   

@@ -37,7 +37,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     HttpClientModule,
     CommonModule,
     FormsModule,
-    MatDialogModule,  // Asegúrate de importar MatDialogModule
+    MatDialogModule,  
     NgFor, NgIf,
     
   ],
